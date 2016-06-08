@@ -1,0 +1,78 @@
+﻿<div ng-controller="MenuCtrl">
+
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    <form class="form" name="form" ng-submit="login()" role="form" style="background-image: url(styles/images/books1.jpg); width:100%; height:100%; background-repeat: no-repeat">
+        <!-- Displaying user name using ng-repeat -->
+        <h4>Login users:</h4>
+        <div ng-repeat="user in myusers" class="user">
+            <a>{{user.username}}</a>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <i class="fa fa-key"></i>
+            <input type="text" name="username" id="username" class="form-control" placeholder="Enter user name" ng-model="username" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <i class="fa fa-lock"></i>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" ng-model="password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger" ng-click="submit()">Login</button>
+            <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+
+        
+    </form>
+
+ 
+</div>
+
+
+    
+
+    <div class="navbar navbar-default" style="background: url(styles/images/tab3.jpg); width:100%; height:10%; border-radius:none; padding-left: 25%; padding-right: 5%">
+        
+        
+        <ul class="nav navbar-nav">
+            
+            <li ng-class="{active:isActive('/main')}"><a class="pointer sb-toggle-center btn btn-warning navbar-btn" ng-href="#/main">Home</a></li>
+
+            <li ng-class="{active:isActive('/tab1')}"><a class="pointer sb-toggle-center btn btn-warning navbar-btn" ng-href="#/tab1">Books by Genres</a></li>
+
+            <li ng-class="{active:isActive('/tab2')}"><a class="pointer sb-toggle-center btn btn-warning navbar-btn" ng-href="#/tab2">Books by Author</a></li>
+
+            <li ng-class="{active:isActive('/tab3')}"><a class="pointer sb-toggle-center btn btn-warning navbar-btn" ng-href="#/tab3">Books by Year</a></li>
+
+            <li ng-class="{active:isActive('/tab4')}"><a class="pointer sb-toggle-center btn btn-warning navbar-btn" ng-href="#/tab4">Contact Us</a></li>
+
+        </ul>
+
+     
+        <div class="col-md-1 pull-right" ng-hide="settingsPiece">
+            <i data-toggle="tooltip" data-placement="bottom" title="Books in Cart ">
+                <div class="dropdown">
+                    <a href="" id="dropdownMenuSettings" data-toggle="dropdown" aria-expanded="true" ><img src="styles/images/cart2.PNG" /></a>
+
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSettings">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#myModal">Books in Cart</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#myFiles">Your Bought Books</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#search">Your Cash</a></li>
+                    </ul>
+                </div>
+            </i>
+        </div>
+
+
+    </div>
+
+    
+
+</div>
+
+
+
+<div ng-include="'partials/menuModal.html'"></div>

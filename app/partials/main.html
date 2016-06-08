@@ -1,0 +1,75 @@
+<div>
+    <h2 class="center">{{title}}</h2><br />
+</div>
+
+<div ng-controller="MainCtrl">
+
+        <form> <!--Search-->
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search book" ng-model="searchBook">
+                </div>
+            </div>
+        </form>
+
+        <!--<pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>-->
+
+        <table class="book table table-bordered table-striped" at-table at-paginated at-list="list" at-config="config" id="content">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th class="title">
+                        <button ng-click="order('title')">Title</button>
+                        <span class="sortorder" ng-show="predicate === 'title'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="order('author')">Author</button>
+                        <span class="sortorder" ng-show="predicate === 'author'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="order('genre')">Genre</button>
+                        <span class="sortorder" ng-show="predicate === 'genre'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="order('year')">Year</button>
+                        <span class="sortorder" ng-show="predicate === 'year'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="order('pages')">Pages</button>
+                        <span class="sortorder" ng-show="predicate === 'pages'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="order('price')">Price</button>
+                        <span class="sortorder" ng-show="predicate === 'price'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="book in list | orderBy:predicate:reverse | filter:searchBook | startFrom: startingItem() | limitTo: booksPerPage">
+                    <td><img ng-src="{{ book.url }}" class="bookimage" /></td>
+                    <td ng-bind="book.title"></td>
+                    <td ng-bind="book.author"></td>
+                    <td ng-bind="book.genre"></td>
+                    <td ng-bind="book.year"></td>
+                    <td ng-bind="book.pages"></td>
+                    <td ng-bind="book.price"></td>
+
+                    <td class="right">
+                        <button class="btn btn-danger" data-ng-click="">Buy</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total books: {{list.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+    <div id="pagination" class="row">
+        <button class="btn btn-primary btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Back</button>
+        <span>{{currentPage+1}} from {{numberOfPages()}}</span>
+        <button class="btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Next</button>
+    </div>
+       
+ </div>
+
